@@ -66,6 +66,8 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));      //must add it here in between Redirection and Authorization ..Allow anyHeader and Any Method so long as origin is origniating from localhost port 4200
 
             app.UseAuthorization();
 
