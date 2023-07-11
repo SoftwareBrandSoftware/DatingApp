@@ -10,16 +10,14 @@ using Microsoft.EntityFrameworkCore;
 // Note we are using Angular for the V of the MVC the view will be the Angular part
 namespace API.Controllers
 {
-    [ApiController]                                                                 //specifying this code is a Api Controller.
-    [Route("api/[controller]")]                                                    // specifying Routing of Api of how we get to here example api/Users
-    public class UsersController : ControllerBase                                  //Inherite from ControllerBase with the dotnet MVC framework
+    public class UsersController : BaseApiController                                  //Inherite from ControllerBase with the dotnet MVC framework
     {
                                                                                    //to get data from our databse we need to use dependency injection ..the  following is below
         private readonly DataContext _context;
         public UsersController(DataContext context)
         {
             _context = context;
-        }
+        } 
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()        //using API.entities -->AppUser ,  using Systems collections.Genric--> IEnumerable

@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using API.Data;
+using API.Services;
+using API.Interfaces;
 
 namespace API
 {
@@ -38,13 +40,16 @@ namespace API
             //Also this is one of the services we have using Dependency injection.
             // (3) the way below for the  " options => ... etc" then this is called a lambda expression.
             // the option => is 
+
+            services.AddScoped<ITokenService, TokenService>();     //using API.Services and API.Interfaces used so that that
+
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
 
             services.AddControllers();
-
+            services.AddCors();
 
             services.AddSwaggerGen(c =>
             {
